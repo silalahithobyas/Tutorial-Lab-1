@@ -1,8 +1,54 @@
 {% extends 'base.html' %}
 
+{% block meta %}
+<body>
+<title>WISHLIST</title>
+{% endblock meta %}
+
 {% block content %}
-<h5>Nama: </h5>
-<p>{{nama}}</p>
+
+<link href='https://fonts.googleapis.com/css?family=Pinyon Script' rel='stylesheet'>
+<link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+  <body>
+    <nav class="navbar navbar-light" style="background-color: #272727;">
+        <b class="navbar-brand" style = "color:#FFFDED; margin-left: 40px; margin-right: 900px">Thobyas Muda Parlindungan</b>
+        <button><a href = "{% url 'wishlist:logout' %}">Logout</a></button>
+    </nav>
+    <h1 style="font-family:'Pinyon Script'"><strong><center>✫ Wishlist ✫</center></strong></h1>
+    <h2 style="font-family:'Poppins'"><center>Username: {{nama}}</center></h2><br>
+  </body>
+
+  <style>
+    table, th, td {
+        border: 1px solid white;
+        border-collapse: collapse;
+    }
+    th, td {
+        background-color: #D8BFD8;
+        padding: 10px;
+        font-family: 'Poppins';
+    }
+    body, table {
+        margin-top: 20px;
+        background-color: #E6E6FA;
+    }
+    h1 {
+        font-size: 50px;
+        margin-bottom: 10px;
+    }
+    .space {
+        width: 4px;
+        height: auto;
+        display: inline-block;
+    }
+    .button-task {
+        text-align: center;
+    }
+  </style>
+
+<body>
+    <h5>Nama: </h5>
+    <p>{{nama}}</p>
 
 <table>
     <tr>
@@ -18,8 +64,9 @@
         <th>{{barang.deskripsi}}</th>
     </tr>
 {% endfor %}
+</body>
+
 </table>
 <h5>Sesi terakhir login: {{ last_login }}</h5>
-<button><a href="{% url 'wishlist:logout' %}">Logout</a></button>
 
 {% endblock content %}

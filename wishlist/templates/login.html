@@ -1,18 +1,21 @@
 {% extends 'base.html' %}
 
 {% block meta %}
-<title>Login</title>
+<body>
+<title>Account Login</title>
 {% endblock meta %}
 
 {% block content %}
 
+<link href='https://fonts.googleapis.com/css?family=Pinyon Script' rel='stylesheet'>
+<link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
 <div class = "login">
 
-    <h1>Login</h1>
+    <h1 style="font-family:'Pinyon Script'"><center>✷ Login ✷</center></h1>
 
     <form method="POST" action="">
         {% csrf_token %}
-        <table>
+        <table align="center">
             <tr>
                 <td>Username: </td>
                 <td><input type="text" name="username" placeholder="Username" class="form-control"></td>
@@ -23,23 +26,42 @@
                 <td><input type="password" name="password" placeholder="Password" class="form-control"></td>
             </tr>
 
-            <tr>
+            <!-- <tr>
                 <td></td>
                 <td><input class="btn login_btn" type="submit" value="Login"></td>
-            </tr>
+            </tr> -->
         </table>
+
+        <input class="btn login_btn" type="submit" value="Login" style="font-family: 'Poppins'; padding: 5px; margin: 10px;">
     </form>
 
     {% if messages %}
-        <ul>
+        <ul >
             {% for message in messages %}
                 <li>{{ message }}</li>
             {% endfor %}
         </ul>
     {% endif %}     
         
-    Belum mempunyai akun? <a href="{% url 'wishlist:register' %}">Buat Akun</a>
+    Don't have an account yet? <a href="{% url 'wishlist:register' %}">Sign up here!</a>
 
 </div>
+</body>
 
+<style>
+    body {
+        background-color: 	#FAF0E6;
+        font-family: 'Poppins';
+    }
+    tr, td {
+        padding: 5px;
+        font-family: 'Poppins';
+    }
+    .login {
+        text-align: center;
+    }
+    input {
+        padding: 5px;
+    }
+</style>
 {% endblock content %}
