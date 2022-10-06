@@ -1,19 +1,13 @@
 from django.shortcuts import render
 from wishlist.models import BarangWishlist
-
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.core import serializers
-
 from django.shortcuts import redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
-
 from django.contrib.auth import authenticate, login
-
 from django.contrib.auth import logout
-
 from django.contrib.auth.decorators import login_required
-
 import datetime
 from django.http import HttpResponseRedirect
 from django.urls import reverse
@@ -29,6 +23,7 @@ def show_wishlist(request):
     }
     return render(request, "wishlist.html", context)
 
+@login_required(login_url='/wishlist/login/')
 def show_wishlist_ajax(request):
     data_barang_wishlist = BarangWishlist.objects.all()
     context = {
@@ -37,6 +32,17 @@ def show_wishlist_ajax(request):
         'last_login': request.COOKIES['last_login']
     }
     return render(request, "wishlist_ajax.html", context)
+
+@login_required(login_url='/wishlist/login/')
+def create_wishlist_json(request):
+    if request.method == 'POST':
+        nama_barang = request.POST.get('barang-name')
+        harga_barang = request.POST.get('barang-price')
+        deskripsi = request.POST.get('barang-description')
+        barang = BarangWishlist(nama_barang=nama_barang, harga_barang=harga_barang, deskripsi=deskripsi)
+        barang.save()
+        return JsonResponse({'nama_barang':nama_barang, 'harga_barang':harga_barang, 'deskripsi':deskripsi})
+
 
 def show_xml(request):
     data = BarangWishlist.objects.all()

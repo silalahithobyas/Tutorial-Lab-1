@@ -37,6 +37,23 @@
     </tr>
 {% endfor %}
 </table>
+
+<script>
+  const table = document.getElementById('table')
+  $(document).ready(() => {
+      $.get('/wishlist/json', (wishlists) => {
+          wishlists.forEach((wishlist) => {
+              $('#table').append(`
+                  <tr class="item-table-row">
+                      <th class="item-table-cell">${wishlist.fields.nama_barang}</th>
+                      <th class="item-table-cell">${wishlist.fields.harga_barang}</th>
+                      <th class="item-table-cell">${wishlist.fields.deskripsi}</th>
+                  </tr>
+              `)
+          })
+      })
+  })
+</script>
 <h5>Sesi terakhir login: {{ last_login }}</h5>
 <button class="btn btn-primary" href="{% url 'wishlist:logout' %}">Logout</button>
 
